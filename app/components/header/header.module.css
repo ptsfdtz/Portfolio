@@ -1,0 +1,58 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background-color: var(--header-bg);
+
+  & .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+
+    & .title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    & .item {
+      color: var(--text);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    & .item:hover {
+      color: var(--link);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    & .actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      & .btn {
+        background: var(--btn-bg);
+        color: var(--btn-text);
+        padding: 5px;
+        border: 1px solid var(--border);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: var(--btn-hover-bg);
+        color: var(--btn-hover-text);
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}

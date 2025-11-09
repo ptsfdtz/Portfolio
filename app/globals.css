@@ -7,3 +7,74 @@
 @import "tailwindcss/preflight";
 @import "tailwindcss/theme";
 @import "tailwindcss/utilities";
+
+:root {
+  /* 背景 */
+  --bg: #faf9f6; /* 页面主背景，米白色 */
+  --header-bg: #fff3e0; /* 导航/标题背景，浅橙色 */
+  --card-bg: #ffffff; /* 卡片/容器背景 */
+
+  /* 文字 */
+  --text: #2c2c2c; /* 主文字，深灰 */
+  --text-secondary: #555555; /* 次文字/描述文字 */
+  --text-inverse: #ffffff; /* 反色文字 */
+
+  /* 按钮 */
+  --btn-bg: #ffb74d; /* 按钮背景，暖橙色 */
+  --btn-text: #ffffff; /* 按钮文字 */
+  --btn-hover-bg: #ffa726; /* 悬停按钮背景 */
+  --btn-hover-text: #ffffff; /* 悬停按钮文字 */
+
+  /* 链接 */
+  --link: #42a5f5; /* 链接颜色，淡蓝色 */
+  --link-hover: #1e88e5; /* 链接悬停颜色 */
+
+  /* 边框 */
+  --border: #e0e0e0; /* 边框颜色 */
+  --border-light: #f0f0f0; /* 浅边框 */
+
+  --border-radius: 10px;
+}
+
+:root.dark,
+:root .dark {
+  /* 背景 */
+  --bg: #1b1b2f; /* 页面主背景，深蓝灰 */
+  --header-bg: #26263d; /* 导航/标题背景，深灰蓝 */
+  --card-bg: #2a2a40; /* 卡片/容器背景 */
+
+  /* 文字 */
+  --text: #e8e8e8; /* 主文字，浅灰 */
+  --text-secondary: #b0b0b0; /* 次文字/描述文字 */
+  --text-inverse: #1b1b2f; /* 反色文字 */
+
+  /* 按钮 */
+  --btn-bg: #5c6bc0; /* 按钮背景，柔和紫蓝 */
+  --btn-text: #ffffff; /* 按钮文字 */
+  --btn-hover-bg: #3f51b5; /* 悬停按钮背景 */
+  --btn-hover-text: #ffffff; /* 悬停按钮文字 */
+
+  /* 链接 */
+  --link: #64b5f6; /* 链接颜色，亮蓝色 */
+  --link-hover: #42a5f5; /* 链接悬停颜色 */
+
+  /* 边框 */
+  --border: #3c3c55; /* 边框颜色 */
+  --border-light: #2f2f4a; /* 浅边框 */
+
+  --border-radius: 10px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
