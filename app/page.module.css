@@ -1,0 +1,52 @@
+/* Module.css 仅包含微动画与组件特定样式。
+   布局、间距、颜色等由 Tailwind 工具类控制。 */
+
+/* 光标闪烁：用于打字机效果 */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 22px;
+  background: currentColor; /* 使用父元素颜色（由 Tailwind 控制） */
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 插画微交互：淡入+上移 */
+.illustration {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+  transition: transform 0.36s ease, opacity 0.36s ease;
+  will-change: transform, opacity;
+}
+.illustration:hover {
+  transform: translateY(-6px);
+}
+
+/* 简单的淡入微动画，可在需要时在 JSX 中加上 className={styles.fadeIn} */
+.fadeIn {
+  animation: fadeIn 0.48s ease both;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
