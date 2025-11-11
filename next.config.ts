@@ -1,7 +1,7 @@
 const nextConfig = {
   output: 'export',
-  basePath: '/Portfolio',
-  assetPrefix: '/Portfolio',
+  // basePath: '/Portfolio',
+  // assetPrefix: '/Portfolio',
   experimental: {
     appDir: true,
   },
