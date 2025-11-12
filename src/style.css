@@ -1,0 +1,465 @@
+/* --- 全局样式 --- */
+:root {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --primary-color: #0d6efd; /* 蓝色主题 */
+  --secondary-color: #6c757d;
+  --text-color: #e0e0e0;
+  --text-muted: #aaa;
+  --border-color: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+h2 {
+  font-size: 2.5rem;
+  border-bottom: 3px solid var(--primary-color);
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+section {
+  padding: 60px 0;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- 头部导航栏 --- */
+#navbar {
+  background-color: var(--surface-color);
+  color: #fff;
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+#navbar ul {
+  list-style: none;
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+#navbar ul li {
+  margin-left: 20px;
+}
+
+#navbar ul li a {
+  color: #fff;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+#navbar ul li a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* 汉堡菜单按钮样式，默认隐藏 */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+  line-height: 1;
+}
+
+/* --- 英雄(Hero)区域 --- */
+#hero {
+  padding-top: 150px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#hero .hero-content {
+  max-width: 60%;
+}
+
+#hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#hero .subtitle {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+#hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+#hero .hero-image {
+  max-width: 35%;
+  text-align: center;
+}
+
+#hero .profile-pic {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--surface-color);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  margin-right: 15px;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* --- 技能(Skills)区域 --- */
+.skill-category {
+  margin-top: 2.5rem;
+}
+
+.skill-category:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.skill-category h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
+}
+
+#skills .skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.skill-tag {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  cursor: default;
+  max-width: 200px;
+  /* 技能评级布局 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 160px;
+  flex-grow: 1;
+}
+
+.skill-tag:hover {
+  transform: translateY(-3px);
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+}
+
+/* 技能评级星级样式 */
+.stars {
+  color: #ffd700; /* 金色星星 */
+  margin-left: 12px;
+  font-size: 0.9em;
+  flex-shrink: 0;
+}
+.stars span {
+  color: #555; /* 空心星的颜色 */
+}
+
+/* --- 项目(Projects)区域 --- */
+#projects .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.project-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.project-card-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.project-card h3 {
+  font-size: 1.5rem;
+}
+
+.project-tech {
+  margin-top: 10px;
+}
+
+.tech-tag {
+  background: #333;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.project-links {
+  padding: 20px;
+  background: #2a2a2a;
+  border-top: 1px solid var(--border-color);
+}
+
+.project-links a {
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+/* --- 经历(Experience) & 奖项(Awards) --- */
+#experience-awards {
+  background: var(--surface-color);
+}
+
+.timeline-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.timeline {
+  width: 48%;
+}
+
+.timeline-item {
+  background: var(--bg-color);
+  border-left: 4px solid var(--primary-color);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.timeline-item h4 {
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.timeline-item .date {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.timeline-item ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.timeline-item li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+
+.timeline-item li::before {
+  content: "•";
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* --- 页脚(Footer) --- */
+#footer {
+  text-align: center;
+  padding: 40px 0;
+  background: #0a0a0a;
+  color: var(--text-muted);
+  margin-top: 40px;
+}
+
+#footer .footer-links {
+  margin-bottom: 10px;
+}
+
+#footer .footer-links a {
+  margin: 0 15px;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+}
+
+#footer .footer-links a:hover {
+  color: var(--primary-color);
+}
+
+/* --- 动画效果 (新增) --- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px); /* 从下方滑入 */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* 800ms的平滑过渡 */
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 针对内部卡片，设置较快的过渡 */
+.project-card,
+.skill-category,
+.timeline-item {
+  transition: all 0.5s ease-out;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* --- 响应式设计 --- */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  /* 导航栏在小屏幕上不换行，保持 logo 和按钮在同一行 */
+  #navbar .container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* 默认隐藏导航菜单 */
+  #navbar ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    background-color: var(--surface-color);
+    padding: 10px 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* 菜单展开时的显示状态 */
+  #navbar ul.nav-open {
+    display: flex;
+  }
+
+  #navbar ul li {
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  #navbar ul li a {
+    display: block;
+    padding: 12px;
+  }
+
+  /* 在小屏幕上显示切换按钮 */
+  .menu-toggle {
+    display: block;
+  }
+
+  #hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 200px;
+    min-height: 40vh;
+  }
+
+  #hero .hero-content {
+    max-width: 100%;
+  }
+
+  #hero .hero-image {
+    max-width: 60%;
+    margin-top: 30px;
+  }
+
+  #hero .profile-pic {
+    width: 200px;
+    height: 200px;
+  }
+
+  .timeline-container {
+    flex-direction: column;
+  }
+  .timeline {
+    width: 100%;
+  }
+}
