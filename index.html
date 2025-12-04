@@ -3,12 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <title>物理实验室</title>
+    <link rel="icon" type="image/svg+xml" href="/Portfolio/react.svg" />
+    <title>portfolio</title>
+    <script>
+      (() => {
+        const STORAGE_KEY = 'theme-preference';
+        const prefersDark = () =>
+          typeof window !== 'undefined' &&
+          typeof window.matchMedia === 'function' &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          const theme =
+            saved === 'dark' || saved === 'light' ? saved : prefersDark() ? 'dark' : 'light';
+          const root = document.documentElement;
+          if (theme === 'dark') root.classList.add('dark');
+          else root.classList.remove('dark');
+        } catch {
+          // ignore hydration-time storage errors
+        }
+      })();
+    </script>
 
     <script type="importmap"></script>
-    <script type="module" crossorigin src="/Portfolio/assets/index-DdiH1p6o.js"></script>
-    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-BdBZECaW.css">
+    <script type="module" crossorigin src="/Portfolio/assets/index-CUFSzQK2.js"></script>
+    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-m2Z6Pf2l.css">
   </head>
   <body>
     <div id="root"></div>
