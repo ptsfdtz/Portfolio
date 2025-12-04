@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowLeft, Download, ExternalLink, Github } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
+import { FaWindows, FaApple, FaLinux, FaDownload, FaAndroid } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
 import { projects } from '../data/projects';
+import Dropdown from '../components/Dropdown';
 
 const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,10 +24,30 @@ const ProjectDetail: React.FC = () => {
     'in-progress': 'In Progress',
     'can-improve': 'Can Improve',
   } as const;
-  const [releaseUrl, setReleaseUrl] = useState<string | null>(null);
-  const [releaseLabel, setReleaseLabel] = useState<string>('Latest Release');
+  const [releaseAssets, setReleaseAssets] = useState<{ name: string; url: string }[]>([]);
   const [releaseError, setReleaseError] = useState<string | null>(null);
-  const [releaseLoading, setReleaseLoading] = useState(false);
+  const [, setReleaseLoading] = useState(false);
+  const [userOS, setUserOS] = useState<string>('unknown');
+  const [, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.includes('win')) setUserOS('windows');
+    else if (ua.includes('mac')) setUserOS('mac');
+    else if (ua.includes('linux')) setUserOS('linux');
+    else if (ua.includes('android')) setUserOS('android');
+  }, []);
 
   const getRepoSlug = (url?: string | null) => {
     if (!url) return null;
@@ -40,8 +62,7 @@ const ProjectDetail: React.FC = () => {
   };
 
   useEffect(() => {
-    setReleaseUrl(null);
-    setReleaseLabel('Latest Release');
+    setReleaseAssets([]);
     setReleaseError(null);
     setReleaseLoading(false);
 
@@ -59,14 +80,19 @@ const ProjectDetail: React.FC = () => {
         });
         if (!response.ok) throw new Error(String(response.status));
         const data = await response.json();
-        const asset = Array.isArray(data.assets)
+
+        const assets = Array.isArray(data.assets)
           ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            data.assets.find((item: any) => item.browser_download_url)
-          : null;
-        const url = asset?.browser_download_url ?? data.html_url;
-        if (url) {
-          setReleaseUrl(url);
-          setReleaseLabel(asset?.name || data.name || 'Latest Release');
+            data.assets.map((item: any) => ({
+              name: item.name,
+              url: item.browser_download_url,
+            }))
+          : [];
+
+        if (assets.length > 0) {
+          setReleaseAssets(assets);
+        } else if (data.html_url) {
+          setReleaseAssets([{ name: 'Latest Release', url: data.html_url }]);
         } else {
           setReleaseError('No downloadable assets found.');
         }
@@ -81,6 +107,46 @@ const ProjectDetail: React.FC = () => {
     loadRelease();
     return () => controller.abort();
   }, [project]);
+
+  const getAssetIcon = (name: string) => {
+    const lower = name.toLowerCase();
+    if (lower.endsWith('.exe') || lower.endsWith('.msi')) return <FaWindows className="w-5 h-5" />;
+    if (
+      lower.endsWith('.dmg') ||
+      lower.endsWith('.pkg') ||
+      lower.includes('mac') ||
+      lower.includes('darwin')
+    )
+      return <FaApple className="w-5 h-5" />;
+    if (
+      lower.endsWith('.deb') ||
+      lower.endsWith('.rpm') ||
+      lower.endsWith('.appimage') ||
+      lower.includes('linux')
+    )
+      return <FaLinux className="w-5 h-5" />;
+    if (lower.endsWith('.apk')) return <FaAndroid className="w-5 h-5" />;
+    return <FaDownload className="w-5 h-5" />;
+  };
+
+  const isCompatible = (name: string) => {
+    const lower = name.toLowerCase();
+    if (userOS === 'windows' && (lower.endsWith('.exe') || lower.endsWith('.msi'))) return true;
+    if (
+      userOS === 'mac' &&
+      (lower.endsWith('.dmg') || lower.endsWith('.pkg') || lower.includes('mac'))
+    )
+      return true;
+    if (
+      userOS === 'linux' &&
+      (lower.endsWith('.deb') || lower.endsWith('.rpm') || lower.endsWith('.appimage'))
+    )
+      return true;
+    if (userOS === 'android' && lower.endsWith('.apk')) return true;
+    return false;
+  };
+
+  const recommendedAsset = releaseAssets.find(asset => isCompatible(asset.name));
 
   if (!project) {
     return (
@@ -102,10 +168,10 @@ const ProjectDetail: React.FC = () => {
   const previewImage = project.imageUrls?.[0] ?? project.imageUrl;
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 text-gray-800 dark:text-gray-100">
+    <div className="max-w-7xl mx-auto text-gray-800 dark:text-gray-100">
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+        className="inline-flex h-12 font-bold items-center gap-2 text-xl text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
@@ -116,7 +182,7 @@ const ProjectDetail: React.FC = () => {
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <div className="flex items-center gap-3">
               <span
-                className={`text-[11px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded-full border 
+                className={`text-xs uppercase tracking-wide font-semibold px-2.5 py-1 rounded-full border 
                   ${
                     project.category === 'web'
                       ? 'text-blue-600 border-blue-100 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-300'
@@ -125,10 +191,10 @@ const ProjectDetail: React.FC = () => {
               >
                 {categoryLabel}
               </span>
-              <span className="text-xs text-gray-400 dark:text-gray-500">ID: {project.id}</span>
+              <span className="text-base text-gray-400 dark:text-gray-500">ID: {project.id}</span>
             </div>
             <span
-              className={`text-[11px] tracking-wide font-semibold px-2 py-0.5 rounded-full border ${statusStyles[project.status]}`}
+              className={`text-xs tracking-wide font-semibold px-2.5 py-1 rounded-full border ${statusStyles[project.status]}`}
             >
               {statusLabel[project.status]}
             </span>
@@ -159,7 +225,7 @@ const ProjectDetail: React.FC = () => {
               allowFullScreen
             />
           ) : project.imageUrls && project.imageUrls.length > 1 ? (
-            <div className="grid gap-3 p-3 md:p-4 md:grid-cols-3 auto-rows-[180px]">
+            <div className="grid gap-3 p-3 md:p-4 md:grid-cols-3 auto-rows-[250px]">
               {project.imageUrls.map((image, index) => (
                 <div
                   key={`${project.id}-image-${index}`}
@@ -203,30 +269,18 @@ const ProjectDetail: React.FC = () => {
               View Code
             </a>
           )}
+
           {project.category === 'desktop' && (
-            <a
-              href={releaseUrl || '#'}
-              target={releaseUrl ? '_blank' : undefined}
-              rel={releaseUrl ? 'noreferrer' : undefined}
-              onClick={e => {
-                if (!releaseUrl) e.preventDefault();
-              }}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors border ${
-                releaseUrl
-                  ? 'bg-indigo-600 text-white hover:bg-indigo-500 border-indigo-700 dark:border-indigo-500'
-                  : 'border-gray-200 dark:border-neutral-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              <Download className="w-4 h-4" />
-              {releaseLoading
-                ? 'Checking...'
-                : releaseUrl
-                  ? `Download ${releaseLabel}`
-                  : releaseError || 'No release available'}
-            </a>
+            <Dropdown
+              assets={releaseAssets}
+              recommendedAsset={recommendedAsset}
+              getAssetIcon={getAssetIcon}
+              isCompatible={isCompatible}
+            />
           )}
         </div>
-        {releaseError && project.category === 'desktop' && (
+
+        {releaseError && project.category === 'desktop' && !releaseAssets.length && (
           <p className="text-sm text-gray-500 dark:text-gray-400">{releaseError}</p>
         )}
       </div>
