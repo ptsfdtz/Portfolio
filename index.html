@@ -3,8 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <title>物理实验室</title>
+    <link rel="icon" type="image/svg+xml" href="/react.svg" />
+    <title>portfolio</title>
+    <script>
+      (() => {
+        const STORAGE_KEY = 'theme-preference';
+        const prefersDark = () =>
+          typeof window !== 'undefined' &&
+          typeof window.matchMedia === 'function' &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          const theme =
+            saved === 'dark' || saved === 'light' ? saved : prefersDark() ? 'dark' : 'light';
+          const root = document.documentElement;
+          if (theme === 'dark') root.classList.add('dark');
+          else root.classList.remove('dark');
+        } catch {
+          // ignore hydration-time storage errors
+        }
+      })();
+    </script>
     <script type="importmap"></script>
   </head>
   <body>
