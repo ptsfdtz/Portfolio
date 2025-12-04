@@ -23,7 +23,6 @@ const ProjectDetail: React.FC = () => {
     'can-improve': 'Can Improve',
   } as const;
   const [releaseUrl, setReleaseUrl] = useState<string | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [releaseLabel, setReleaseLabel] = useState<string>('Latest Release');
   const [releaseError, setReleaseError] = useState<string | null>(null);
   const [releaseLoading, setReleaseLoading] = useState(false);
@@ -222,7 +221,7 @@ const ProjectDetail: React.FC = () => {
               {releaseLoading
                 ? 'Checking...'
                 : releaseUrl
-                  ? 'Download Latest'
+                  ? `Download ${releaseLabel}`
                   : releaseError || 'No release available'}
             </a>
           )}
