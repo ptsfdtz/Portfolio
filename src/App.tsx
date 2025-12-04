@@ -24,7 +24,7 @@ const App: React.FC = () => {
   );
 
   const chipBase =
-    'relative px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer';
+    'relative px-5 py-1.5 rounded-full text-[1rem] font-medium transition-colors duration-200 cursor-pointer';
   const chipActive = 'text-white dark:text-black';
   const chipInactive = 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white';
 
@@ -32,7 +32,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300 font-sans selection:bg-gray-200 dark:selection:bg-gray-800">
       <Header currentTheme={theme} onThemeChange={setTheme} />
 
-      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-10xl mx-auto">
         <Routes>
           <Route
             path="/"
@@ -40,7 +40,7 @@ const App: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-center gap-6 bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl px-6 py-4 shadow-sm max-w-4xl mx-auto mb-10">
                   <div className="flex items-center justify-center gap-3">
-                    <span className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    <span className="text-base uppercase tracking-wide text-gray-500 dark:text-gray-400">
                       Type
                     </span>
                     <div className="relative flex gap-1 bg-white dark:bg-black/40 rounded-full p-1">
@@ -73,7 +73,7 @@ const App: React.FC = () => {
                   <div className="hidden md:block h-6 w-px bg-gray-200 dark:bg-neutral-800" />
 
                   <div className="flex items-center justify-center gap-3">
-                    <span className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    <span className="text-base uppercase tracking-wide text-gray-500 dark:text-gray-400">
                       Status
                     </span>
                     <div className="relative flex gap-1 bg-white dark:bg-black/40 rounded-full p-1">

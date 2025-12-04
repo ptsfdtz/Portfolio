@@ -24,18 +24,18 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ currentTheme, onThemeChange }
   const getIcon = () => {
     switch (currentTheme) {
       case 'light':
-        return <Sun className="w-5 h-5" />;
+        return <Sun className="w-6 h-6" />;
       case 'dark':
-        return <Moon className="w-5 h-5" />;
+        return <Moon className="w-6 h-6" />;
       case 'system':
-        return <Monitor className="w-5 h-5" />;
+        return <Monitor className="w-6 h-6" />;
     }
   };
 
   const options: { value: ThemeMode; label: string; icon: React.ReactNode }[] = [
-    { value: 'light', label: 'light', icon: <Sun className="w-4 h-4" /> },
-    { value: 'dark', label: 'dark', icon: <Moon className="w-4 h-4" /> },
-    { value: 'system', label: 'system', icon: <Monitor className="w-4 h-4" /> },
+    { value: 'light', label: 'light', icon: <Sun className="w-6 h-6" /> },
+    { value: 'dark', label: 'dark', icon: <Moon className="w-6 h-6" /> },
+    { value: 'system', label: 'system', icon: <Monitor className="w-6 h-6" /> },
   ];
 
   return (
@@ -49,7 +49,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ currentTheme, onThemeChange }
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-neutral-800 rounded-xl shadow-lg border border-gray-100 dark:border-neutral-700 py-1 z-50 animate-in fade-in zoom-in-95 duration-200">
+        <div className="absolute right-0 mt-2 w-50 bg-white dark:bg-neutral-800 rounded-xl shadow-lg border border-gray-100 dark:border-neutral-700 py-1 z-50 animate-in fade-in zoom-in-95 duration-200">
           {options.map(option => (
             <button
               key={option.value}
@@ -65,7 +65,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ currentTheme, onThemeChange }
                 {option.icon}
                 <span>{option.label}</span>
               </div>
-              {currentTheme === option.value && <Check className="w-4 h-4" />}
+              {currentTheme === option.value && <Check className="w-5 h-5" />}
             </button>
           ))}
         </div>

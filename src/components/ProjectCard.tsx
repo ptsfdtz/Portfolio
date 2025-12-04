@@ -63,7 +63,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="relative group w-full aspect-4/3 rounded-xl overflow-hidden bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800/50 transition-all duration-300 hover:scale-[1.01] cursor-pointer"
+      className="relative group w-full aspect-8/5 rounded-xl overflow-hidden bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800/50 transition-all duration-300 hover:scale-[1.01] cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="button"
@@ -93,7 +93,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <div>
             <div className="flex justify-between items-center mb-3">
               <span
-                className={`text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full border 
+                className={`text-xs uppercase tracking-wider font-semibold px-3 py-1 rounded-full border 
                 ${
                   project.category === 'web'
                     ? 'text-blue-600 border-blue-100 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-300'
@@ -103,7 +103,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 {categoryLabel}
               </span>
               <span
-                className={`text-[10px] tracking-wider font-semibold px-2 py-0.5 rounded-full border ${statusStyles[project.status]}`}
+                className={`text-xs tracking-wider font-semibold px-3 py-1 rounded-full border ${statusStyles[project.status]}`}
               >
                 {statusLabel[project.status]}
               </span>
@@ -161,7 +161,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           )}
 
           {/* Action Bar overlay */}
-          <div className="absolute inset-x-0 bottom-0 p-4 bg-linear-to-t from-black/80 via-black/40 to-transparent flex justify-end gap-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <div className="absolute inset-x-0 bottom-0 p-4 bg-linear-to-t from-black/10 via-black/5 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent flex justify-end gap-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ">
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
