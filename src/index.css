@@ -1,9 +1,37 @@
 @import 'tailwindcss';
+@config '../tailwind.config.js';
 
 @layer base {
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  /* Soften iframe scrollbars */
+  iframe {
+    scrollbar-width: thin;
+    scrollbar-color: #9ca3af transparent;
+  }
+
+  iframe::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  iframe::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  iframe::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  iframe::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+    background-clip: content-box;
   }
 }
