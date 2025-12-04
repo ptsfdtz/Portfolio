@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ currentTheme, onThemeChange }) => {
         <Link to="/" className="flex items-center gap-2 select-none">
           <Layers className="w-5 h-5 text-gray-900 dark:text-gray-100" />
           <span className="font-bold text-lg tracking-tight text-gray-900 dark:text-gray-100">
-            我的项目
+            My Portfolio
           </span>
         </Link>
 

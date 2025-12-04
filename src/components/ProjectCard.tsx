@@ -14,6 +14,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const timeoutRef = useRef<number | null>(null);
   const previewImage = project.imageUrls?.[0] ?? project.imageUrl;
+  const categoryLabel = project.category === 'web' ? 'Web' : 'Desktop';
+  const statusStyles: Record<Project['status'], string> = {
+    completed:
+      'text-emerald-600 border-emerald-100 bg-emerald-50 dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-300',
+    'in-progress':
+      'text-amber-600 border-amber-100 bg-amber-50 dark:bg-amber-900/20 dark:border-amber-800 dark:text-amber-300',
+    'can-improve':
+      'text-purple-600 border-purple-100 bg-purple-50 dark:bg-purple-900/20 dark:border-purple-800 dark:text-purple-300',
+  };
+  const statusLabel: Record<Project['status'], string> = {
+    completed: 'Done',
+    'in-progress': 'Ongoing',
+    'can-improve': 'Improving',
+  };
 
   // Spotlight effect refs
   const cardRef = useRef<HTMLDivElement>(null);
@@ -49,7 +63,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="relative group w-full aspect-4/3 rounded-xl overflow-hidden bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800/50 transition-all duration-300 hover:scale-[1.01]"
+      className="relative group w-full aspect-4/3 rounded-xl overflow-hidden bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800/50 transition-all duration-300 hover:scale-[1.01] cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       role="button"
@@ -77,10 +91,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           className={`absolute inset-0 p-6 flex flex-col justify-between transition-opacity duration-300 z-10 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
         >
           <div>
-            <div className="flex justify-between items-start mb-3">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
-                {project.title}
-              </h3>
+            <div className="flex justify-between items-center mb-3">
               <span
                 className={`text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full border 
                 ${
@@ -89,9 +100,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                     : 'text-emerald-600 border-emerald-100 bg-emerald-50 dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-300'
                 }`}
               >
-                {project.category}
+                {categoryLabel}
+              </span>
+              <span
+                className={`text-[10px] tracking-wider font-semibold px-2 py-0.5 rounded-full border ${statusStyles[project.status]}`}
+              >
+                {statusLabel[project.status]}
               </span>
             </div>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight mb-2">
+              {project.title}
+            </h3>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-light line-clamp-3">
               {project.description}
             </p>

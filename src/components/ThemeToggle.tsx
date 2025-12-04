@@ -33,9 +33,9 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ currentTheme, onThemeChange }
   };
 
   const options: { value: ThemeMode; label: string; icon: React.ReactNode }[] = [
-    { value: 'light', label: '浅色', icon: <Sun className="w-4 h-4" /> },
-    { value: 'dark', label: '深色', icon: <Moon className="w-4 h-4" /> },
-    { value: 'system', label: '跟随系统', icon: <Monitor className="w-4 h-4" /> },
+    { value: 'light', label: 'light', icon: <Sun className="w-4 h-4" /> },
+    { value: 'dark', label: 'dark', icon: <Moon className="w-4 h-4" /> },
+    { value: 'system', label: 'system', icon: <Monitor className="w-4 h-4" /> },
   ];
 
   return (
