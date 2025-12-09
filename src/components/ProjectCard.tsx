@@ -12,6 +12,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [shouldLoadIframe, setShouldLoadIframe] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
   const timeoutRef = useRef<number | null>(null);
   const previewImage = project.imageUrls?.[0] ?? project.imageUrl;
   const categoryLabel = project.category === 'web' ? 'Web' : 'Desktop';
@@ -50,14 +51,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       }, 300);
     } else {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShouldLoadIframe(false);
-      setIframeLoaded(false);
+      // If the iframe has loaded once, keep it mounted (cached) so it won't reload on subsequent hovers
+      if (!hasLoadedOnce) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setShouldLoadIframe(false);
+        setIframeLoaded(false);
+      }
     }
+
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [isHovered, project.category, project.demoUrl]);
+  }, [isHovered, project.category, project.demoUrl, hasLoadedOnce]);
+
+  // mark that iframe has loaded once to keep it mounted afterwards
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (iframeLoaded) setHasLoadedOnce(true);
+  }, [iframeLoaded]);
 
   return (
     <div
@@ -135,7 +146,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {/* Web Project: Iframe */}
           {project.category === 'web' && project.demoUrl ? (
             <div className="w-full h-full bg-white dark:bg-neutral-800 relative">
-              {shouldLoadIframe ? (
+              {shouldLoadIframe || hasLoadedOnce ? (
                 <>
                   {!iframeLoaded && (
                     <div className="absolute inset-0 flex items-center justify-center text-gray-400">
