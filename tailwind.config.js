@@ -1,16 +1,36 @@
+const { nextui } = require("@nextui-org/theme");
+
 /** @type {import('tailwindcss').Config} */
-export default {
-  // Use class strategy so toggling `document.documentElement.classList` works
-  darkMode: 'class',
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
-      maxWidth: {
-        '8xl': '96rem',
-        '9xl': '112rem',
-        '10xl': '128rem',
+      colors: {
+        midnight: "#eef0f7",
+        knight: "#2a2f35",
+        darkBg: "#0f1217",
+        cardBlue: "#8cc9fe",
+        cardGreen: "#63ccae",
+        cardPink: "#ffbfd1",
+        cardYellow: "#ffdf9a",
+      },
+      fontFamily: {
+        oleo: "var(--font-oleo)",
+      },
+      keyframes: {
+        fade: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        fade: "fade 1s ease-in-out",
       },
     },
   },
-  plugins: [require('tailwindcss-debug-screens')],
+  darkMode: "class",
+  plugins: [nextui(), require("tailwind-scrollbar-hide")],
 };
