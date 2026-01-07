@@ -30,7 +30,7 @@ interface HomeProps {
   dogUrl: string;
   actionImageUrl: string;
   resumeUrl: string;
-  webagentUrl: string;
+  liteMarkUrl: string;
   chatbotUrl: string;
   paperUrl: string;
 }
@@ -41,7 +41,7 @@ const Home = ({
   dogUrl,
   actionImageUrl,
   resumeUrl,
-  webagentUrl,
+  liteMarkUrl,
   chatbotUrl,
   paperUrl,
 }: HomeProps) => {
@@ -148,13 +148,13 @@ const Home = ({
           <IconCloud iconSlugs={icons} />
         </div>
         <div
-          key="webAgent"
+          key="liteMark"
           className={cn(
             "bg-white dark:bg-darkBg dark:border-2 dark:border-knight cursor-grab active:cursor-grabbing rounded-[2rem] flex justify-center items-center overflow-hidden z-[1]",
-            selectedCard[tabSelected]["webAgent"] ? "opacity-100" : "opacity-50",
+            selectedCard[tabSelected]["liteMark"] ? "opacity-100" : "opacity-50",
           )}
         >
-          <WebAgent webAgentUrl={webagentUrl} />
+          <WebAgent liteMarkUrl={liteMarkUrl} />
         </div>
         <div
           key="chatBot"
