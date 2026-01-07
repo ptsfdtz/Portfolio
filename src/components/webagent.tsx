@@ -1,3 +1,5 @@
+import type { SVGProps } from "react";
+
 import { Link } from "@nextui-org/react";
 import { GoArrowUpRight } from "react-icons/go";
 import Image from "next/image";
@@ -5,6 +7,8 @@ import Image from "next/image";
 interface WebAgentProps {
   liteMarkUrl: string;
 }
+
+const ArrowIcon = GoArrowUpRight as React.FC<SVGProps<SVGSVGElement>>;
 
 const WebAgent = ({ liteMarkUrl }: WebAgentProps) => {
   return (
@@ -30,7 +34,7 @@ const WebAgent = ({ liteMarkUrl }: WebAgentProps) => {
               LiteMark
             </span>
           </Link>
-          <GoArrowUpRight />
+          <ArrowIcon />
         </div>
       </button>
     </div>

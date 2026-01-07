@@ -1,9 +1,13 @@
+import type { SVGProps } from "react";
+
 import { Link } from "@nextui-org/react";
 import { GoArrowUpRight } from "react-icons/go";
 import Image from "next/image";
 interface ChatbotProps {
   chatbotUrl: string;
 }
+
+const ArrowIcon = GoArrowUpRight as React.FC<SVGProps<SVGSVGElement>>;
 
 const Chatbot = ({ chatbotUrl }: ChatbotProps) => {
   return (
@@ -26,7 +30,7 @@ const Chatbot = ({ chatbotUrl }: ChatbotProps) => {
             <span className="text-sm md:text-medium text-nowrap hidden group-hover:block invisible group-hover:visible mr-1 animate-fade">
               physics lab
             </span>
-            <GoArrowUpRight />
+            <ArrowIcon />
           </Link>
         </div>
       </button>

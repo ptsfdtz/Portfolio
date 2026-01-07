@@ -1,3 +1,5 @@
+import type { SVGProps } from "react";
+
 import { Link } from "@nextui-org/react";
 import { GoArrowUpRight } from "react-icons/go";
 import Image from "next/image";
@@ -5,6 +7,8 @@ import Image from "next/image";
 interface ActionsProps {
   photoUrl: string;
 }
+
+const ArrowIcon = GoArrowUpRight as React.FC<SVGProps<SVGSVGElement>>;
 
 const Actions = ({ photoUrl }: ActionsProps) => {
   return (
@@ -26,7 +30,7 @@ const Actions = ({ photoUrl }: ActionsProps) => {
               LiteSound
             </span>
           </Link>
-          <GoArrowUpRight />
+          <ArrowIcon />
         </div>
       </button>
     </div>
