@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ComponentProps, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
@@ -8,6 +8,8 @@ interface AvatarTransitionProps {
   avatarUrl: string;
   dogUrl: string;
 }
+
+const SyncIcon = MdOutlineSync as unknown as React.FC<ComponentProps<"svg">>;
 
 const AvatarTransition: React.FC<AvatarTransitionProps> = ({
   avatarUrl,
@@ -80,7 +82,7 @@ const AvatarTransition: React.FC<AvatarTransitionProps> = ({
       </div>
       <Button
         className="rounded-full border-midnight dark:border-knight"
-        startContent={<MdOutlineSync size={16} />}
+        startContent={<SyncIcon aria-hidden className="h-4 w-4" />}
         variant="bordered"
         onPress={() => setToggle((prev) => !prev)}
       >

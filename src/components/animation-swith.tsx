@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from "@nextui-org/button";
-import { Dispatch, FC, SetStateAction } from "react";
+import { Tooltip } from "@nextui-org/react";
 import { FaMagic } from "react-icons/fa";
 import { FaImage } from "react-icons/fa6";
-import { Tooltip } from "@nextui-org/react";
+import { ComponentProps, Dispatch, FC, SetStateAction } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -13,6 +13,9 @@ export interface AnimationSwitchProps {
   animated: boolean;
   setAnimated: Dispatch<SetStateAction<boolean>>;
 }
+
+const MagicIcon = FaMagic as unknown as FC<ComponentProps<"svg">>;
+const ImageIcon = FaImage as unknown as FC<ComponentProps<"svg">>;
 
 export const AnimationSwitch: FC<AnimationSwitchProps> = ({ className, animated, setAnimated }) => {
   const onChange = () => {
@@ -30,7 +33,7 @@ export const AnimationSwitch: FC<AnimationSwitchProps> = ({ className, animated,
             variant="bordered"
             onPress={onChange}
           >
-            <FaMagic size={16} />
+            <MagicIcon aria-hidden className="h-4 w-4" />
           </Button>
         </Tooltip>
       ) : (
@@ -41,7 +44,7 @@ export const AnimationSwitch: FC<AnimationSwitchProps> = ({ className, animated,
           variant="bordered"
           onPress={onChange}
         >
-          <FaImage size={16} />
+          <ImageIcon aria-hidden className="h-4 w-4" />
         </Button>
       )}
     </div>
