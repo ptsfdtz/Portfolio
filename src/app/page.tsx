@@ -2,13 +2,13 @@ import Home from "@/components/home";
 
 export default function App() {
   const assets = {
-    avatar: "/placeholders/avatar.svg",
-    dog: "/placeholders/dog.svg",
+    avatar: "/placeholders/avatar.jpg",
+    dog: "/placeholders/avatar-1.svg",
     action: "/placeholders/action.svg",
     webagent: "/placeholders/webagent.svg",
     chatbot: "/placeholders/chatbot.svg",
     paper: "/placeholders/paper.svg",
-    resume: "/resume",
+    resume: "https://resume.ptsfdtz.top/",
   };
 
   const photos = ["/photos/photo-1.svg", "/photos/photo-2.svg", "/photos/photo-3.svg"];

@@ -24,7 +24,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ className }) => {
         className={clsx("transition-opacity hover:opacity-80 cursor-pointer", className)}
         classNames={{
           wrapper: "w-[4.5rem] h-10 group-data-[selected=true]:bg-midnight bg-[#1e2228]",
-          thumb: "w-8 h-8 group-data-[selected=true]:ml-8",
+          thumb: "w-8 h-8 group-data-[selected=true]:ml-7",
           base: "w-[4.5rem] h-10",
           thumbIcon: "w-5 h-5",
         }}

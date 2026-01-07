@@ -43,13 +43,13 @@ const MapComponent: React.FC = () => {
           width={300}
         />
       )}
-      {mapboxToken ? (
+      {/* {mapboxToken ? (
         <div ref={mapContainerRef} className="w-full h-full" />
       ) : (
         <div className="absolute bottom-4 right-4 bg-white/80 text-xs px-3 py-2 rounded-full">
           Set NEXT_PUBLIC_MAPBOX_TOKEN to enable map
         </div>
-      )}
+      )} */}
       <div
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
             flex items-center justify-center
