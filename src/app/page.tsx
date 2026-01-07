@@ -11,7 +11,15 @@ export default function App() {
     resume: "https://resume.ptsfdtz.top/",
   };
 
-  const photos = ["/photos/photo-1.svg", "/photos/photo-2.svg", "/photos/photo-3.svg"];
+  const photos = [
+    "/photos/001.jpg",
+    "/photos/002.jpg",
+    "/photos/003.jpg",
+    "/photos/004.jpg",
+    "/photos/005.jpg",
+    "/photos/006.jpg",
+    "/photos/007.jpg",
+  ];
 
   return (
     <Home
